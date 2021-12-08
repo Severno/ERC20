@@ -1,5 +1,5 @@
 import "@nomiclabs/hardhat-ethers";
-import "./tasks";
+import "@nomiclabs/hardhat-waffle";
 
 import { HardhatUserConfig } from "hardhat/types";
 import { getConfig } from "./utils/networks";
@@ -7,7 +7,6 @@ import { getConfig } from "./utils/networks";
 const settings = getConfig("bsc_testnet");
 
 const config: HardhatUserConfig = {
-  defaultNetwork: "localhost",
   networks: {
     localhost: {
       url: "http://127.0.0.1:8545",

@@ -2,7 +2,7 @@ import "@nomiclabs/hardhat-ethers";
 
 import { BaseProvider } from "@ethersproject/providers/lib/base-provider";
 import { Contract } from "ethers";
-import { SignerWithAddress } from "hardhat-deploy-ethers/dist/src/signers";
+import { SignerWithAddress } from "@nomiclabs/hardhat-ethers/signers";
 import { expect } from "chai";
 import hre from "hardhat";
 
@@ -94,7 +94,7 @@ describe("Token", function () {
           addr1.address,
           ethers.utils.parseUnits("1001.0", decimals)
         )
-      ).to.be.rejectedWith("ERC20: Transfer amount exceeds balance");
+      ).to.be.revertedWith("ERC20: Transfer amount exceeds balance");
     });
 
     it("should emit Transfer", async () => {
@@ -103,7 +103,6 @@ describe("Token", function () {
       const amount = ethers.utils.parseUnits("100", decimals);
 
       await expect(token.transfer(to, amount))
-        // @ts-ignore
         .to.emit(token, "Transfer")
         .withArgs(from, to, amount);
     });
@@ -114,7 +113,6 @@ describe("Token", function () {
       const amount = ethers.utils.parseUnits("10", decimals);
 
       await expect(token.connect(owner).approve(addr1.address, amount))
-        // @ts-ignore
         .to.emit(token, "Approval")
         .withArgs(owner.address, addr1.address, amount);
     });
@@ -130,7 +128,7 @@ describe("Token", function () {
 
       await expect(
         token.connect(addr1).transferFrom(ownerAddress, to, amount)
-      ).to.be.rejectedWith("ERC20: transfer amount exceeds allowance");
+      ).to.be.revertedWith("ERC20: transfer amount exceeds allowance");
     });
   });
 });
