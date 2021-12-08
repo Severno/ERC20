@@ -7,6 +7,7 @@ import { getConfig } from "./utils/networks";
 const settings = getConfig("bsc_testnet");
 
 const config: HardhatUserConfig = {
+  defaultNetwork: "hardhat",
   networks: {
     localhost: {
       url: "http://127.0.0.1:8545",
@@ -44,7 +45,7 @@ const config: HardhatUserConfig = {
         runs: 200,
       },
     },
-  },
+  }
 };
 
 export default config;
