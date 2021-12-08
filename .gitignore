@@ -1,0 +1,9 @@
+node_modules/
+bundle/
+build
+dist
+.env
+.env-bsc_testnet
+.env-localhost
+cache
+artifacts
