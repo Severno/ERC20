@@ -1,3 +1,4 @@
+import { getConfig } from "../utils/networks";
 import { task } from "hardhat/config";
 
 task("transferFrom", "TransferFrom token")
@@ -6,10 +7,20 @@ task("transferFrom", "TransferFrom token")
   .addParam("amount", "Amount of tokens")
   .setAction(async (taskArgs, hre) => {
     const [owner] = await hre.ethers.getSigners();
-    const Token = await hre.ethers.getContractFactory("CRGToken");
-    const token = await Token.attach(
-      "0xaC60eeeD4adcea750Da61560e30Fa13607125f9d" // The deployed contract address
-    );
+
+    const networkName = hre.network.name;
+    const { tokenName, tokenAddress, tokenSymbol, tokenDecimals } =
+      getConfig(networkName);
+
+    let Token;
+    let token;
+    if (networkName === "bsc_testnet") {
+      Token = await hre.ethers.getContractFactory("CRGToken");
+      token = await Token.attach(tokenAddress);
+    } else {
+      Token = await hre.ethers.getContractFactory("CRGToken");
+      token = await Token.deploy(tokenName, tokenSymbol, tokenDecimals);
+    }
 
     await token.transferFrom(
       taskArgs.from,
