@@ -2,8 +2,11 @@ node_modules/
 bundle/
 build
 dist
+.nyc_output
+.vscode
 .env
 .env-bsc_testnet
 .env-localhost
 cache
 artifacts
+coverage

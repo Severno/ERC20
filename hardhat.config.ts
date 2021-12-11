@@ -1,5 +1,7 @@
+import "@typechain/hardhat";
 import "@nomiclabs/hardhat-ethers";
 import "@nomiclabs/hardhat-waffle";
+import "solidity-coverage";
 
 import { HardhatUserConfig } from "hardhat/types";
 import { getConfig } from "./utils/networks";
@@ -45,7 +47,7 @@ const config: HardhatUserConfig = {
         runs: 200,
       },
     },
-  }
+  },
 };
 
 export default config;

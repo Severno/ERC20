@@ -14,9 +14,9 @@
     "resolveJsonModule": true,
     "sourceMap": true,
     "strict": true,
-    "target": "es6"
+    "target": "es6",
   },
   "exclude": ["node_modules"],
   "files": ["./hardhat.config.ts"],
-  "include": ["tasks/**/*", "test/*", "types/**/*", "typechain/**/*", "scripts/deploy.ts"]
+  "include": ["tasks/**/*", "test/**/*", "types/**/*", "typechain/**/*", "scripts/deploy.ts"]
 }
